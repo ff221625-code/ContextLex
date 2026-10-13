@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ContextLex</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+<div class="container">
+
+    <header>
+        <h1>ContextLex</h1>
+        <p>
+            Real-Time Context-Aware NLP Analysis
+            and Language Prediction System
+        </p>
+    </header>
+
+    <!-- Modules -->
+
+    <div class="modules">
+
+        <button class="module-btn active"
+                onclick="selectModule('sense',this)">
+            🧠 Word Sense
+        </button>
+
+        <button class="module-btn"
+                onclick="selectModule('semantic',this)">
+            🔍 Semantic Roles
+        </button>
+
+        <button class="module-btn"
+                onclick="selectModule('ngram',this)">
+            ✨ Next Word
+        </button>
+
+    </div>
+
+
+    <!-- Input -->
+
+    <div class="card">
+
+        <label for="sentence">
+            Enter your sentence
+        </label>
+
+        <textarea id="sentence"
+            placeholder="Example: I went to the bank to deposit money.">
+        </textarea>
+
+        <div id="target-section">
+
+            <label for="target">
+                Target word (optional)
+            </label>
+
+            <input id="target"
+                   placeholder="Example: bank">
+
+            <small>
+                Leave empty to automatically detect
+                an ambiguous word.
+            </small>
+
+        </div>
+
+        <button class="analyze-btn"
+                onclick="analyze()">
+            🔎 Analyze Sentence
+        </button>
+
+    </div>
+
+
+    <!-- Result -->
+
+    <div id="result" class="result-card">
+
+        <h2>Result</h2>
+
+        <p class="placeholder">
+            Enter a sentence and click Analyze.
+        </p>
+
+    </div>
+
+
+    <footer>
+        ContextLex • NLP Real-Time Project
+    </footer>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}">
+</script>
+
+</body>
+</html>
