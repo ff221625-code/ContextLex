@@ -144,7 +144,7 @@ The accuracy of the analysis depends on the implemented algorithms, predefined v
 - Enhance prediction accuracy and user experience.
   
 -------
-# 🪪👩🏻‍💻Author Firdous Fathima 
+# 👩🏻‍💻Author Firdous Fathima 
 
 ContextLex Project
 
