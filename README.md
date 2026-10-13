@@ -33,7 +33,7 @@ Uses an N-gram-based language modeling approach to suggest possible next words b
   
 --------
 ## Project Structure
-``
+
 ContextLex/
 ├── app.py
 ├── requirements.txt
@@ -43,7 +43,7 @@ ContextLex/
 └── static/
     ├── script.js
     └── style.css 
- `` 
+ 
  
 ------
 ## Installation and Setup
@@ -54,30 +54,45 @@ Prerequisites
 - Git (optional, for cloning the repository)
 
 1. Clone the repository
+   
 ``
 git clone https://github.com/ff221625-code/ContextLex.git
+``
+
+``
 cd ContextLex
 ``
+
 2. Create a virtual environment
+   
 ``
 python -m venv venv
 ``
+
 Activate it on Windows:
+
 ``
 venv\Scripts\activate
 ``
+
 3. Install dependencies
+   
 ``
 pip install -r requirements.txt
 ``
+
 If required, download the WordNet resources used by NLTK:
+
 ``
 python -c "import nltk; nltk.download('wordnet'); nltk.download('omw-1.4')"
 ``
+
 4. Run the application
+
 ``
 python app.py
 ``
+
 Open the local address displayed by Flask in your browser. If the application uses port 5001, visit:
 
 "http://127.0.0.1:5001"
