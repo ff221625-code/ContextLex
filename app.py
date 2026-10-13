@@ -310,7 +310,7 @@ def semantic_roles(sentence):
         "love", "loves", "loved",
         "like", "likes", "liked",
         "make", "makes", "made", "making",
-        "take", "takes", "took", "taking"
+        "take", "takes", "took", "taking",
         "is", "are", "was", "were", "am"
         "be", "been", "being"
     }
