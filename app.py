@@ -93,37 +93,110 @@ def similarity(sentence, example, target):
 def find_target(sentence, target=""):
     ws = words(sentence)
 
-    # User supplied target
+    # 1. Respect a target explicitly entered by the user.
     if target and target.lower() in ws:
         return target.lower()
 
-    # Prefer words present in our dataset
-    dataset_words = {
-        row["target_word"].lower()
-        for row in wsd_data
-    }
+    # 2. Find words in the sentence that have multiple
+    #    distinct senses in the local WSD dataset.
+    dataset_senses = {}
 
-    for w in ws:
-        if w in dataset_words:
-            return w
+    for row in wsd_data:
+        word = row.get("target_word", "").lower().strip()
+        sense = (
+            row.get("sense", "").strip()
+            or row.get("meaning", "").strip()
+        )
 
-    # WordNet fallback
+        if word in ws and word not in STOP and sense:
+            dataset_senses.setdefault(word, {}).setdefault(
+                sense, []
+            ).append(row)
+
+    # 3. Select a dataset word only when its context
+    #    supports one sense more strongly than the others.
+    candidates = []
+
+    for word, senses in dataset_senses.items():
+        if len(senses) < 2:
+            continue
+
+        context = clean_context(sentence, word)
+        scores = []
+
+        for sense, examples in senses.items():
+            best_score = 0
+
+            for row in examples:
+                example_words = clean_context(
+                    row.get("sentence", ""), word
+                )
+                score = len(context & example_words)
+                best_score = max(best_score, score)
+
+            scores.append((best_score, sense))
+
+        scores.sort(reverse=True)
+        best_score = scores[0][0]
+        second_score = scores[1][0]
+
+        if best_score >= 1 and best_score > second_score:
+            candidates.append(
+                (best_score - second_score, best_score, word)
+            )
+
+    if candidates:
+        candidates.sort(reverse=True)
+        return candidates[0][2]
+
+    # 4. WordNet fallback: require contextual evidence
+    #    favoring one sense over another.
     try:
-        candidates = []
+        wordnet_candidates = []
 
-        for w in ws:
-            if w in STOP:
+        for word in ws:
+            if word in STOP or len(word) < 3:
                 continue
 
-            if len(wn.synsets(w)) > 1:
-                candidates.append(w)
+            synsets = wn.synsets(word)
 
-        if candidates:
-            return candidates[0]
+            if len(synsets) < 2:
+                continue
+
+            context = clean_context(sentence, word)
+            scores = []
+
+            for syn in synsets:
+                sense_text = (
+                    syn.definition() + " "
+                    + " ".join(syn.examples()) + " "
+                    + " ".join(
+                        lemma.name().replace("_", " ")
+                        for lemma in syn.lemmas()
+                    )
+                )
+
+                sense_words = clean_context(sense_text, word)
+                scores.append(len(context & sense_words))
+
+            scores.sort(reverse=True)
+
+            if (
+                scores[0] >= 1
+                and scores[0] > scores[1]
+            ):
+                wordnet_candidates.append(
+                    (scores[0] - scores[1], scores[0], word)
+                )
+
+        if wordnet_candidates:
+            wordnet_candidates.sort(reverse=True)
+            return wordnet_candidates[0][2]
 
     except LookupError:
         pass
 
+    # 5. Do not force a target when no suitable word is found.
     return ""
 
 
@@ -238,6 +311,8 @@ def semantic_roles(sentence):
         "like", "likes", "liked",
         "make", "makes", "made", "making",
         "take", "takes", "took", "taking"
+        "is", "are", "was", "were", "am"
+        "be", "been", "being"
     }
 
     verb = -1
