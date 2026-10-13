@@ -1,9 +1,9 @@
-# ContextLex: Real-Time Context-Aware NLP Analysis and Language Prediction System
+# 📃✍🏻ContextLex: Real-Time Context-Aware NLP Analysis and Language Prediction System
 
 ContextLex is a web-based Natural Language Processing (NLP) project designed to analyze sentences, identify the meaning of words based on context, extract basic semantic roles, and predict the next word using language modeling techniques.
 
 -----
-## Features
+## ✨Features
 
 1. Word Sense Disambiguation
 
@@ -22,7 +22,7 @@ Analyzes sentence structure to identify:
 Uses an N-gram-based language modeling approach to suggest possible next words based on the preceding text.
 
 -------
-## Technologies Used
+## 🛠️Technologies Used
 
 - Python – Core programming language
 - Flask – Web application framework
@@ -32,8 +32,8 @@ Uses an N-gram-based language modeling approach to suggest possible next words b
 - JavaScript – Frontend interactions and communication with the Flask backend
   
 --------
-## Project Structure
-
+## 📁Project Structure
+```
 ContextLex/
 ├── app.py
 ├── requirements.txt
@@ -43,10 +43,10 @@ ContextLex/
 └── static/
     ├── script.js
     └── style.css 
- 
+ ```
  
 ------
-## Installation and Setup
+## ⚙️Installation and Setup
 
 Prerequisites
 
@@ -98,7 +98,7 @@ Open the local address displayed by Flask in your browser. If the application us
 "http://127.0.0.1:5001"
 
 ----
-## How to Use
+## ▶️How to Use
 
 1. Open the ContextLex web application.
 2. Enter a sentence in the input field.
@@ -121,7 +121,7 @@ The word crane refers to a machine used for lifting heavy objects.
 The exact output depends on the implemented analysis logic and the resources available in the environment.
 
 -----
-## Project Objectives
+## 📌Project Objectives
 
 - Explore practical applications of Natural Language Processing.
 - Demonstrate context-based word meaning identification.
@@ -132,10 +132,10 @@ The exact output depends on the implemented analysis logic and the resources ava
 ------
 ## Limitations
 
-The accuracy of the analysis depends on the implemented algorithms, predefined verb forms, training data, and available NLP resources. Semantic role analysis is a basic implementation and may not correctly interpret every sentence structure.
+The accuracy of the analysis depends on the implemented algorithms, predefined verb forms, training data, and available NLP resources. Semantic role analysis is a basic semantic role analysis using predefined verb forms implementation for every sentence structure.
 
 -------
-## Future Enhancements
+## 🚀Future Enhancements
 
 - Improve grammatical and semantic analysis using advanced NLP models.
 - Expand the language prediction training corpus.
@@ -144,13 +144,13 @@ The accuracy of the analysis depends on the implemented algorithms, predefined v
 - Enhance prediction accuracy and user experience.
   
 -------
-# Author Firdous Fathima 
+# 🪪👩🏻‍💻Author Firdous Fathima 
 
 ContextLex Project
 
 A student project demonstrating context-aware NLP analysis and language prediction using Python and Flask.
 
 --------
-## License
+## 🪪License
 
 This project is available for educational and learning purposes. Add a formal open-source license if you decide to distribute it under specific reuse terms.
